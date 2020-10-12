@@ -1,21 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-import Header from './components/Header'
-
-import { Grid } from '@material-ui/core'
-import { Typography } from '@material-ui/core'
-import { Box } from '@material-ui/core'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/core'
 import {AppBar} from '@material-ui/core'
-import {Tabs} from '@material-ui/core'
-import {Tab} from '@material-ui/core'
+import {Tabs, Tab} from '@material-ui/core'
+import {TabPanel, TabContext} from '@material-ui/lab'
 
 import blueGrey from '@material-ui/core/colors/blueGrey'
 import blue from '@material-ui/core/colors/blue'
 
+import Home from './views/HomeView'
+import BanBot from './views/BanBot'
+import Guide from './views/Guide'
 
 const theme = createMuiTheme({
   palette: {
@@ -29,7 +26,7 @@ const theme = createMuiTheme({
 });
 
 function App() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
@@ -38,36 +35,24 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <Grid container justify="center">
-          <Grid item xs={12}>
-            <AppBar position="static" color="primary">
-              <Tabs value={value} onChange={handleChange}>
-                <Tab label="Home"/>
-                <Tab label="BanBot"/>
-                <Tab label="Guide"/>
-                <Tab label="About"/>
-              </Tabs>
-            </AppBar>
-          </Grid>
-          <Grid item xs={12}>
-            <Box mt={5}>
-              <Typography variant="h2">
-                Welcome to BanBot!
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Box my={4}>
-              <Typography variant="body1">
-                BanBot is an application that helps you ban champions during
-                a clash tournament.  Simply input the summoner names, and BanBot
-                will do the rest!  Our advanced algorithms analyze what champions
-                each summoner will likely play and which champions they are likely to
-                perform well with.
-              </Typography>
-            </Box>
-          </Grid>
-        </Grid>
+        <TabContext value={value}>
+          <AppBar position="static" color="primary">
+            <Tabs value={value} onChange={handleChange} aria-label="scrollable auto tabs example">
+              <Tab label="Home" value="1"/>
+              <Tab label="BanBot" value="2"/>
+              <Tab label="Guide" value="3"/>
+            </Tabs>
+          </AppBar>
+          <TabPanel value="1">
+            <Home/>
+          </TabPanel>
+          <TabPanel value="2">
+            <BanBot/>
+          </TabPanel>
+          <TabPanel value="3">
+            <Guide/>
+          </TabPanel>
+        </TabContext>
       </ThemeProvider>
     </div>
   );
