@@ -1,1 +1,1 @@
-web: node server.js
+web: yarn build && serve -s build
