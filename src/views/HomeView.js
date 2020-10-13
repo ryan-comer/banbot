@@ -13,7 +13,7 @@ export default function HomeView() {
               </Typography>
                 </Box>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={10} md={6}>
                 <Box my={4}>
                     <Typography variant="body1">
                         BanBot is an application that helps you ban champions during
